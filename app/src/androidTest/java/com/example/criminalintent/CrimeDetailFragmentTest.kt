@@ -1,15 +1,17 @@
 package com.example.criminalintent
 
 import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.FragmentScenario.Companion.launch
-import androidx.test.espresso.Espresso.*
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.espresso.Espresso.closeSoftKeyboard
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
-import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assert.*
-
+import androidx.test.espresso.matcher.ViewMatchers.isChecked
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +25,7 @@ class CrimeDetailFragmentTest {
 
     @Before
     fun setUp() {
-        scenario = launch(CrimeDetailFragment::class.java)
+        scenario = launchFragmentInContainer()
     }
 
     @After
@@ -35,7 +37,7 @@ class CrimeDetailFragmentTest {
     fun checkValueCrimeTitle(){
         val titleCrime = "Roubaram meu pão"
 
-        onView(withId(R.id.crime_title)).perform(typeText(titleCrime))
+        onView(withId(R.id.crime_title)).perform(replaceText(titleCrime))
 
         closeSoftKeyboard()
 
@@ -48,9 +50,9 @@ class CrimeDetailFragmentTest {
     fun checkValueCrimeSolved() {
         scenario.onFragment{fragment ->
             assertFalse(fragment.binding.crimeSolved.isChecked)
-
-            fragment.binding.crimeSolved.isChecked = true
         }
+
+        onView(withId(R.id.crime_solved)).perform(click())
 
         onView(withId(R.id.crime_solved)).check(matches(isChecked()))
     }
