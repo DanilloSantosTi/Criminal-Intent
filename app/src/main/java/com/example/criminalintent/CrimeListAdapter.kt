@@ -14,7 +14,7 @@ class CrimeHolder(
 ) : ViewHolder(binding.root) {
     fun bind(crime: Crime) {
         binding.crimeTitle.text = crime.title
-        binding.crimeDate.text = crime.date.toString()
+        binding.crimeDate.text = crime.formattedDate(crime.date)
 
         binding.root.setOnClickListener {
             Toast.makeText(binding.root.context, "${crime.title}, clicked", Toast.LENGTH_SHORT)
@@ -30,7 +30,7 @@ class CrimeHolderRequiresPolice(
 ) : ViewHolder(binding.root) {
     fun bind(crime: Crime) {
         binding.crimeSeriousTitle.text = crime.title
-        binding.crimeSeriousDate.text = crime.date.toString()
+        binding.crimeSeriousDate.text = crime.formattedDate(crime.date)
 
         binding.root.setOnClickListener {
             Toast.makeText(binding.root.context, "${crime.title}, clicked", Toast.LENGTH_SHORT)
