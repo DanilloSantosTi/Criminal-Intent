@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.criminalintent.databinding.CrimeListItemBinding
 import com.example.criminalintent.databinding.CrimeSeriousListItemBinding
+import com.example.criminalintent.model.Crime
 
 class CrimeHolder(
     private val binding: CrimeListItemBinding

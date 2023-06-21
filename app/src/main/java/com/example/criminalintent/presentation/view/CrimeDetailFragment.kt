@@ -1,12 +1,12 @@
-package com.example.criminalintent
+package com.example.criminalintent.presentation.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnDetach
 import androidx.core.widget.doOnTextChanged
+import com.example.criminalintent.model.Crime
 import com.example.criminalintent.databinding.FragmentCrimeDetailBinding
 import java.util.*
 

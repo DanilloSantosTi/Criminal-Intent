@@ -1,13 +1,23 @@
-package com.example.criminalintent
+package com.example.criminalintent.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.criminalintent.model.Crime
+import kotlinx.coroutines.launch
 import java.util.*
 
 class CrimeListViewModel : ViewModel() {
     val crimes = mutableListOf<Crime>()
 
     init {
-        for (i in 0 until SIZE_LIST){
+        viewModelScope.launch {
+            crimes += loadCrimes()
+        }
+    }
+
+    suspend fun loadCrimes(): List<Crime> {
+        val result = mutableListOf<Crime>()
+        for (i in 0 until SIZE_LIST) {
             val crime = Crime(
                 id = UUID.randomUUID(),
                 title = "Crime $i",
@@ -16,8 +26,9 @@ class CrimeListViewModel : ViewModel() {
                 requirePolice = i % 2 == 0
             )
 
-            crimes += crime
+            result += crime
         }
+        return result
     }
 
     companion object {
